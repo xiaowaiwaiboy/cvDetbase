@@ -25,15 +25,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cnn_model/model/backbone/mobilenet" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cnn_model/model/backbone" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\pycharm_projects\cvDetbase\cnn_model\model\backbone" />
       <recent name="G:\pycharm_projects\cvDetbase\cnn_model\model\backbone\mobilenet" />
       <recent name="G:\pycharm_projects\cvDetbase\cnn_model\data\utils" />
       <recent name="G:\pycharm_projects\cvDetbase\cnn_model\data" />
       <recent name="G:\pycharm_projects\cvDetbase\cnn_model\config" />
-      <recent name="G:\pycharm_projects\cvDetbase\cnn_model\model\head" />
     </key>
   </component>
   <component name="RunManager" selected="Python.test">
