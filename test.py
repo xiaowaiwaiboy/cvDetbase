@@ -1,17 +1,15 @@
 from cnn_model.data import *
 import numpy as np
 import torch.utils.data
-import argparse
-from tensorboardX import SummaryWriter
-import yaml
 from cnn_model.model import build_detector
 from tqdm import tqdm
+from utils import json_file
 
-config = yaml.load(open('./cnn_model/config/detector.yaml', 'r'), Loader=yaml.FullLoader)
+eval_cfg = ''
+config = json_file.load(eval_cfg)
 model_cfg = config.get('detector')
 model_cfg['mode'] = 'inference'
 data_cfg = config.get('dataset_eval')
-writer = SummaryWriter(logdir=f'runs/{model_cfg["cfg"]}_{data_cfg["cfg"]}'.lower())
 
 model = build_detector(cfg=model_cfg)
 model = torch.nn.DataParallel(model)
