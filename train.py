@@ -1,17 +1,17 @@
-from cnn_model.data import *
+from CNN.data import *
 from torchvision import transforms
 import torch.utils.data
 import argparse
 from tensorboardX import SummaryWriter
 import yaml
-from cnn_model.model import build_detector
-from cnn_model.utils import build_optimizer
+from CNN.model import build_detector
+from CNN.utils import build_optimizer
 import time
 import os
 from utils import json_file
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config_file', type=str, default='./cnn_model/config/detector.yaml')
+parser.add_argument('--config_file', type=str, default='config/detector.yaml')
 parser.add_argument('--resume-from', type=str, default=None)
 parser.add_argument('--epochs', type=int, default=20, help='number of total epochs')
 parser.add_argument('--save_epochs', type=int, default=10, help='when to save weights')

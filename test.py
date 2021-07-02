@@ -1,7 +1,7 @@
-from cnn_model.data import *
+from CNN.data import *
 import numpy as np
 import torch.utils.data
-from cnn_model.model import build_detector
+from CNN.model import build_detector
 from tqdm import tqdm
 from utils import json_file
 
