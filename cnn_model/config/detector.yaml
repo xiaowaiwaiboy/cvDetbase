@@ -38,6 +38,12 @@ detector:
     nms_iou_thres: 0.7
     max_detection: 300
 
+optimizer:
+  cfg: 'SGD'
+  lr: 0.01
+  momentum: 0.9
+  weight_decay: 0.0001
+
 dataset_train:
       cfg: 'VOCDataset'
       batch_size: 4

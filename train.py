@@ -5,8 +5,14 @@ import argparse
 from tensorboardX import SummaryWriter
 import yaml
 from cnn_model.model import build_detector
+from cnn_model.utils import build_optimizer
+import time
+import os
+from utils import json_file
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--config_file', type=str, default='./cnn_model/config/detector.yaml')
+parser.add_argument('--resume-from', type=str, default=None)
 parser.add_argument('--epochs', type=int, default=20, help='number of total epochs')
 parser.add_argument('--save_epochs', type=int, default=10, help='when to save weights')
 parser.add_argument('--num_workers', type=int, default=4)
@@ -16,10 +22,20 @@ parser.add_argument('--warmup_steps', type=int, default=500)
 parser.add_argument('--optimizer', type=str, default='SGD')
 opt = parser.parse_args()
 
-config = yaml.load(open('./cnn_model/config/detector.yaml', 'r'), Loader=yaml.FullLoader)
+if opt.resume_from is not None:
+    config = json_file.load(opt.resume_from + 'cfg.json')
+    weights = f'epoch_{config["epoch"]}'
+else:
+    config = yaml.load(open(opt.config_file, 'r'), Loader=yaml.FullLoader)
+
+json_file.show(config)
 model_cfg = config.get('detector')
 data_cfg = config.get('dataset_train')
-writer = SummaryWriter(logdir=f'runs/{model_cfg["cfg"]}_{data_cfg["cfg"]}'.lower())
+
+timestamp = time.strftime('%Y%m%d_%H%M%S', time.localtime())
+logpath = f'runs/{timestamp}_{model_cfg["cfg"]}_{data_cfg["cfg"]}'.lower()
+writer = SummaryWriter(logdir=logpath)
+json_file.save(config, logpath)
 
 model = build_detector(cfg=model_cfg)
 model = torch.nn.DataParallel(model)
@@ -30,7 +46,8 @@ train_dataset = build_dataset(cfg=data_cfg,
 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=data_cfg.get('batch_size'), collate_fn=collate_fn)
 
-optimizer = torch.optim.SGD(model.parameters(), lr=opt.lr, momentum=0.9, weight_decay=0.0001)
+optimizer = build_optimizer(config.get('optimizer'), params=model.parameters())
+# optimizer = torch.optim.SGD(model.parameters(), lr=opt.lr, momentum=0.9, weight_decay=0.0001)
 
 for epoch in range(opt.epochs):
 
@@ -54,7 +71,8 @@ for epoch in range(opt.epochs):
         total_loss.mean().backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 3)
         optimizer.step()
-        print(
-            "cls_loss:%.4f reg_loss:%.4f total_loss:%.4f" % (cls_loss.mean(), reg_loss.mean(), total_loss.mean()))
+        print("cls_loss:%.4f reg_loss:%.4f total_loss:%.4f" % (cls_loss.mean(), reg_loss.mean(), total_loss.mean()))
     if epoch > opt.save_epochs:
-        torch.save(model.state_dict(), f'checkpoint/{model_cfg["cfg"]}_{epoch + 1}.pth')
+        torch.save(model.state_dict(), f'runs/{logpath}/epoch_{epoch + 1}.pth')
+        config['epoch'] = epoch
+        json_file.save(config, logpath)
