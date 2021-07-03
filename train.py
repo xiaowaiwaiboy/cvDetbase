@@ -12,7 +12,7 @@ from utils import json_file
 import torch
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config_file', type=str, default='config/efficientdet_fpn.yaml')
+parser.add_argument('--config_file', type=str, default='config/fcos_fpn_r50.yaml')
 parser.add_argument('--resume-from', type=str, default=None)
 parser.add_argument('--epochs', type=int, default=20, help='number of total epochs')
 parser.add_argument('--save_epochs', type=int, default=10, help='when to save weights')
@@ -67,7 +67,7 @@ for epoch in range(opt.epochs):
             lr = opt.lr * 0.1
 
         optimizer.zero_grad()
-        cls_loss, reg_loss, total_loss = model([images.cuda(), boxes.cuda(), classes.cuda()])
+        cls_loss, reg_loss, cnt_loss, total_loss = model([images.cuda(), boxes.cuda(), classes.cuda()])
         writer.add_scalar('lr', lr, global_step=global_steps)
         writer.add_scalar('cls_loss', cls_loss.mean(), global_step=global_steps)
         writer.add_scalar('reg_loss', reg_loss.mean(), global_step=global_steps)

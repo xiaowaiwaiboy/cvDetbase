@@ -71,7 +71,6 @@ class EfficientDetHead(nn.Module):
                  feat_channels=256,
                  num_anchors=9,
                  prior=0.01,
-                 norm=None,
                  **kwargs):
         super(EfficientDetHead, self).__init__()
         self.cls_convs = nn.ModuleList()

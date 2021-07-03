@@ -2,24 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be68ab11-ea33-4dd2-8622-42929e9b8908" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/efficientnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/detector/efficientdet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/head/atss_head.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/head/efficientdet_head.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/neck/BiFPN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/efficientdet_fpn.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/detector/fcos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/generator/target_generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/loss/fcos_loss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/fcos_fpn_r50.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/backbone/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/backbone/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CNN/model/detector/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/detector/efficientdet.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/efficientdet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CNN/model/detector/retinanet.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/retinanet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/generator/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/generator/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CNN/model/head/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/head/retina_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/retina_head.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/neck/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/neck/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/detector.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/retinanet_fpn_r50.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/head/efficientdet_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/efficientdet_head.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/loss/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/loss/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/utils/base_conv.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/utils/base_conv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/efficientdet_fpn.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/efficientdet_fpn.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/retinanet_fpn_r50.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/retinanet_fpn_r50.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -177,5 +175,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/CNN/model/detector/fcos.py</url>
+          <line>196</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

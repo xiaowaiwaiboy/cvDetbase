@@ -1,7 +1,7 @@
 detector:
   cfg: 'RetinaNet'
   mode: 'training'
-  anchor_generator:
+  generator:
     cfg: 'Horizontal_Generator'
     ratios: [0.5, 1, 2]
     scales: '[2 ** 0, 2 ** (1.0 / 3.0), 2 ** (2.0 / 3.0)]'

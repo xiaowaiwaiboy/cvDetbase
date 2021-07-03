@@ -1,40 +1,44 @@
 detector:
-  cfg: 'EfficientDet'
+  cfg: 'FCOS'
   mode: 'training'
   generator:
-    cfg: 'Horizontal_Generator'
-    ratios: [0.5, 1, 2]
-    scales: '[2 ** 0, 2 ** (1.0 / 3.0), 2 ** (2.0 / 3.0)]'
+    cfg: 'TargetGenerator'
     strides: [8, 16, 32, 64, 128]
-    sizes: [32, 64, 128, 256, 512]
+    limit_range: [[-1, 64], [64, 128], [128, 256], [256, 512], [512, 999999]]
   encoder:
     backbone_:
-      cfg: 'efficientnet_b8'
+      cfg: 'resnet50'
       pretrained: False
       include_top: False
-      out_indices: [19, 41, 60]
+      out_indices: [3, 4, 5]
+      norm: 'BN'
     neck_:
       cfg: 'FPN'
       out_channel: 256
       use_p5: True
     head_:
-      cfg: 'EfficientDetHead'
+      cfg: 'FCOSHead'
       num_classes: 25
+      stacked_convs: 4
       feat_channels: 256
-      num_anchors: 9
       prior: 0.01
+      cnt_on_reg: True
+      norm: 'BN'
     loss_:
-      cfg: 'retina_loss'
+      cfg: 'fcos_loss'
       cls_loss:
         cfg: 'focal_loss'
         alpha: 0.25
         gamma: 2.0
       reg_loss:
         cfg: 'smooth_l1'
+      cnt_loss:
+        cfg: 'ce'
   decoder:
     score_thres: 0.3
     nms_iou_thres: 0.7
     max_detection: 300
+    add_centerness: True
 
 optimizer:
   cfg: 'SGD'
@@ -44,8 +48,8 @@ optimizer:
 
 dataset_train:
       cfg: 'VOCDataset'
-      batch_size: 3
-      img_sizes: [224, 224]
+      batch_size: 4
+      img_sizes: [480, 640]
       train_set: "[('2007', 'trainval')]"
       root_dir: 'H:/DataSets/VOCdevkit0712/VOCdevkit'
       is_train: False

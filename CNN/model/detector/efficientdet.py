@@ -174,11 +174,11 @@ class ClipBoxes(nn.Module):
 
 @DETECTORS.register_module()
 class EfficientDet(nn.Module):
-    def __init__(self,  mode=None, encoder=None, anchor_generator=None, decoder=None):
+    def __init__(self,  mode=None, encoder=None, generator=None, decoder=None):
         super(EfficientDet, self).__init__()
         self.mode = mode
         self.encoder = Encoder(encoder)
-        self.get_anchors = build_generator(anchor_generator)
+        self.get_anchors = build_generator(generator)
         if self.mode == 'training':
             self.loss_func = build_loss(cfg=encoder.get('loss_'))
         else:
