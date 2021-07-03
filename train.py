@@ -1,17 +1,18 @@
-from cnn_model.data import *
+from CNN.data import *
 from torchvision import transforms
 import torch.utils.data
 import argparse
 from tensorboardX import SummaryWriter
 import yaml
-from cnn_model.model import build_detector
-from cnn_model.utils import build_optimizer
+from CNN.model import build_detector
+from CNN.utils import build_optimizer
 import time
 import os
 from utils import json_file
+import torch
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config_file', type=str, default='./cnn_model/config/detector.yaml')
+parser.add_argument('--config_file', type=str, default='config/fcos_fpn_r50.yaml')
 parser.add_argument('--resume-from', type=str, default=None)
 parser.add_argument('--epochs', type=int, default=20, help='number of total epochs')
 parser.add_argument('--save_epochs', type=int, default=10, help='when to save weights')
@@ -24,11 +25,12 @@ opt = parser.parse_args()
 
 if opt.resume_from is not None:
     config = json_file.load(opt.resume_from + 'cfg.json')
-    weights = f'epoch_{config["epoch"]}'
+    weights = torch.load(f'epoch_{config["epoch"]}')
 else:
     config = yaml.load(open(opt.config_file, 'r'), Loader=yaml.FullLoader)
+    weights = None
 
-json_file.show(config)
+# json_file.show(config)
 model_cfg = config.get('detector')
 data_cfg = config.get('dataset_train')
 
@@ -38,6 +40,8 @@ writer = SummaryWriter(logdir=logpath)
 json_file.save(config, logpath)
 
 model = build_detector(cfg=model_cfg)
+if weights:
+    model.load_state_dict(weights)
 model = torch.nn.DataParallel(model)
 model = model.cuda().train()
 
@@ -63,7 +67,7 @@ for epoch in range(opt.epochs):
             lr = opt.lr * 0.1
 
         optimizer.zero_grad()
-        cls_loss, reg_loss, total_loss = model([images.cuda(), boxes.cuda(), classes.cuda()])
+        cls_loss, reg_loss, cnt_loss, total_loss = model([images.cuda(), boxes.cuda(), classes.cuda()])
         writer.add_scalar('lr', lr, global_step=global_steps)
         writer.add_scalar('cls_loss', cls_loss.mean(), global_step=global_steps)
         writer.add_scalar('reg_loss', reg_loss.mean(), global_step=global_steps)
