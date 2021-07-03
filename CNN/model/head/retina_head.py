@@ -8,9 +8,9 @@ import math
 class RetinaHead(nn.Module):
     def __init__(self,
                  num_classes,
-                 in_channels,
+                 in_channel,
                  stacked_convs=4,
-                 feat_channels=256,
+                 feat_channel=256,
                  num_anchors=9,
                  prior=0.01,
                  norm=None,
@@ -19,17 +19,17 @@ class RetinaHead(nn.Module):
         self.cls_convs = nn.ModuleList()
         self.reg_convs = nn.ModuleList()
         self.stacked_convs = stacked_convs
-        self.in_channels = in_channels
-        self.feat_channels = feat_channels
+        self.in_channels = in_channel
+        self.feat_channels = feat_channel
         self.cls_out_channels = num_classes * num_anchors
         self.num_anchors = num_anchors
         for i in range(self.stacked_convs):
-            inc_chn = self.in_channels if i == 0 else self.feat_channels
+            in_chn = self.in_channels if i == 0 else self.feat_channels
             self.cls_convs.append(
-                Conv_Module(inc_chn, self.feat_channels, 3, 1, 1, activation=nn.ReLU(inplace=True), norm=norm)
+                Conv_Module(in_chn, self.feat_channels, 3, 1, 1, activation=nn.ReLU(inplace=True), norm=norm)
             )
             self.reg_convs.append(
-                Conv_Module(inc_chn, self.feat_channels, 3, 1, 1, activation=nn.ReLU(inplace=True), norm=norm)
+                Conv_Module(in_chn, self.feat_channels, 3, 1, 1, activation=nn.ReLU(inplace=True), norm=norm)
             )
         self.retina_cls = nn.Conv2d(self.feat_channels, self.cls_out_channels, (3, 3), padding=(1, 1))
         self.retina_reg = nn.Conv2d(self.feat_channels, num_anchors * 4, (3, 3), padding=(1, 1))

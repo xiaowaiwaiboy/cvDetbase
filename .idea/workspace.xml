@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be68ab11-ea33-4dd2-8622-42929e9b8908" name="Default Changelist" comment="" />
+    <list default="true" id="be68ab11-ea33-4dd2-8622-42929e9b8908" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/efficientnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/detector/efficientdet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/head/atss_head.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/head/efficientdet_head.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNN/model/neck/BiFPN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/efficientdet_fpn.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/backbone/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/backbone/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/detector/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/detector/retinanet.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/retinanet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/head/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/head/retina_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/retina_head.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/neck/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/neck/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/detector.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/retinanet_fpn_r50.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,19 +43,21 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cnn_model/model/backbone" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CNN/model/neck" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\pycharm_projects\cvDetbase\CNN\model\neck" />
+      <recent name="G:\pycharm_projects\cvDetbase\CNN\model\backbone" />
+      <recent name="G:\pycharm_projects\cvDetbase\CNN\model\backbone\efficientnet" />
       <recent name="G:\pycharm_projects\cvDetbase\cnn_model\model\backbone" />
       <recent name="G:\pycharm_projects\cvDetbase\cnn_model\model\backbone\mobilenet" />
-      <recent name="G:\pycharm_projects\cvDetbase\cnn_model\data\utils" />
-      <recent name="G:\pycharm_projects\cvDetbase\cnn_model\data" />
-      <recent name="G:\pycharm_projects\cvDetbase\cnn_model\config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\pycharm_projects\cvDetbase\CNN\model\backbone\efficientnet" />
       <recent name="G:\pycharm_projects\cvDetbase" />
     </key>
   </component>
@@ -82,6 +104,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="cvDetbase" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="cvDetbase" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -106,6 +149,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.train" />
+        <item itemvalue="Python.test_model" />
         <item itemvalue="Python.optimizer" />
         <item itemvalue="Python.test" />
       </list>
@@ -121,5 +165,17 @@
       <updated>1625194757246</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

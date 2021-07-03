@@ -5,14 +5,14 @@ import numpy as np
 
 
 class Encoder(nn.Module):
-    def __init__(self, config, **kwargs):
+    def __init__(self, config):
         super(Encoder, self).__init__()
         backbone_ = config.get('backbone_')
         neck_ = config.get('neck_')
         head_ = config.get('head_')
-        self.features = build_backbone(backbone_, **kwargs)
-        self.neck = build_neck(neck_, in_channels=self.features.out_channel, **kwargs)
-        self.head = build_head(head_, in_channel=self.neck.out_channel, **kwargs)
+        self.features = build_backbone(backbone_)
+        self.neck = build_neck(neck_, in_channels=self.features.out_channel)
+        self.head = build_head(head_, in_channel=self.neck.out_channel)
 
     def forward(self, x):
         out = self.features(x)
@@ -22,7 +22,7 @@ class Encoder(nn.Module):
 
 
 class Decoder(nn.Module):
-    def __init__(self, score_thres, nms_iou_thres, max_detection, **kwargs):
+    def __init__(self, score_thres, nms_iou_thres, max_detection):
         super(Decoder, self).__init__()
         self.score_thres = score_thres
         self.nms_iou_thres = nms_iou_thres
@@ -173,9 +173,9 @@ class ClipBoxes(nn.Module):
 
 
 @DETECTORS.register_module()
-class RetinaNet(nn.Module):
-    def __init__(self, mode=None, encoder=None, anchor_generator=None, decoder=None, **kwargs):
-        super(RetinaNet, self).__init__()
+class EfficientDet(nn.Module):
+    def __init__(self,  mode=None, encoder=None, anchor_generator=None, decoder=None):
+        super(EfficientDet, self).__init__()
         self.mode = mode
         self.encoder = Encoder(encoder)
         self.get_anchors = build_generator(anchor_generator)
@@ -183,7 +183,6 @@ class RetinaNet(nn.Module):
             self.loss_func = build_loss(cfg=encoder.get('loss_'))
         else:
             self.decoder = Decoder(**decoder)
-            self.clip_boxes = ClipBoxes()
 
     def forward(self, inputs):
         if self.mode == 'training':
@@ -199,16 +198,3 @@ class RetinaNet(nn.Module):
             cls_scores, cls_idxs, boxes = self.decoder([cls_logits, reg_preds, anchors])
             boxes = self.clip_boxes(batch_images, boxes)
             return cls_scores, cls_idxs, boxes
-
-
-if __name__ == '__main__':
-    model = RetinaNet(backbone_='mobilenetv2', neck_='FPN', pretrained=False, loss_=[],
-                      score_thres=0.3, nms_iou_thres=0.7, max_detections=300)
-    '''
-    out_indices: backbone output feature indices
-    pretrained: if load backbone pretrained weights
-    '''
-    # inputs = torch.randn(1, 3, 224, 224)
-    # cls_score, box_pred = model(inputs)
-    # print([o.shape for o in box_pred])
-    # print([o.shape for o in cls_score])

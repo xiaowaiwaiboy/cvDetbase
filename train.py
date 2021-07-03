@@ -9,9 +9,10 @@ from CNN.utils import build_optimizer
 import time
 import os
 from utils import json_file
+import torch
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config_file', type=str, default='config/detector.yaml')
+parser.add_argument('--config_file', type=str, default='config/efficientdet_fpn.yaml')
 parser.add_argument('--resume-from', type=str, default=None)
 parser.add_argument('--epochs', type=int, default=20, help='number of total epochs')
 parser.add_argument('--save_epochs', type=int, default=10, help='when to save weights')
@@ -24,11 +25,12 @@ opt = parser.parse_args()
 
 if opt.resume_from is not None:
     config = json_file.load(opt.resume_from + 'cfg.json')
-    weights = f'epoch_{config["epoch"]}'
+    weights = torch.load(f'epoch_{config["epoch"]}')
 else:
     config = yaml.load(open(opt.config_file, 'r'), Loader=yaml.FullLoader)
+    weights = None
 
-json_file.show(config)
+# json_file.show(config)
 model_cfg = config.get('detector')
 data_cfg = config.get('dataset_train')
 
@@ -38,6 +40,8 @@ writer = SummaryWriter(logdir=logpath)
 json_file.save(config, logpath)
 
 model = build_detector(cfg=model_cfg)
+if weights:
+    model.load_state_dict(weights)
 model = torch.nn.DataParallel(model)
 model = model.cuda().train()
 
