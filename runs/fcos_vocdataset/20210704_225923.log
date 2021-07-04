@@ -1,0 +1,89 @@
+2021-07-04 22:59:23,897 - fcos_vocdataset - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: win32
+Python: 3.8.10 (default, May 19 2021, 13:12:57) [MSC v.1916 64 bit (AMD64)]
+CUDA available: True
+GPU 0: GeForce RTX 3060 Laptop GPU
+CUDA_HOME: None
+GCC: n/a
+PyTorch: 1.8.0
+PyTorch compiling details: PyTorch built with:
+  - C++ Version: 199711
+  - MSVC 192829337
+  - Intel(R) Math Kernel Library Version 2020.0.0 Product Build 20191125 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v1.7.0 (Git Hash 7aed236906b1f7a05c0917e5257a1af05e9ff683)
+  - OpenMP 2019
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.1
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.0.5
+  - Magma 2.5.4
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.1, CUDNN_VERSION=8.0.5, CXX_COMPILER=C:/cb/pytorch_1000000000000/work/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /GR /EHsc /w /bigobj -DUSE_PTHREADPOOL -openmp:experimental -DNDEBUG -DUSE_FBGEMM -DUSE_XNNPACK, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.8.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, 
+
+TorchVision: 0.9.0
+OpenCV: 4.5.2
+------------------------------------------------------------
+
+2021-07-04 22:59:27,157 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 0/1253 | Classification loss: 1.10626 | Regression loss: 0.69886 | Running loss:2.80489
+2021-07-04 22:59:41,877 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 20/1253 | Classification loss: 1.03443 | Regression loss: 0.65210 | Running loss:2.78189
+2021-07-04 22:59:56,277 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 40/1253 | Classification loss: 0.92084 | Regression loss: 0.65066 | Running loss:2.72009
+2021-07-04 23:00:11,243 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 60/1253 | Classification loss: 0.92952 | Regression loss: 0.66684 | Running loss:2.68321
+2021-07-04 23:00:25,647 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 80/1253 | Classification loss: 0.96768 | Regression loss: 0.66450 | Running loss:2.66051
+2021-07-04 23:00:40,653 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 100/1253 | Classification loss: 0.89771 | Regression loss: 0.66560 | Running loss:2.63985
+2021-07-04 23:00:55,587 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 120/1253 | Classification loss: 0.87279 | Regression loss: 0.65749 | Running loss:2.62025
+2021-07-04 23:01:10,460 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 140/1253 | Classification loss: 0.79645 | Regression loss: 0.66398 | Running loss:2.60391
+2021-07-04 23:01:25,343 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 160/1253 | Classification loss: 0.80995 | Regression loss: 0.66989 | Running loss:2.58824
+2021-07-04 23:01:40,626 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 180/1253 | Classification loss: 0.81381 | Regression loss: 0.65213 | Running loss:2.57253
+2021-07-04 23:01:55,077 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 200/1253 | Classification loss: 0.67332 | Regression loss: 0.64618 | Running loss:2.55923
+2021-07-04 23:02:11,125 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 220/1253 | Classification loss: 0.76540 | Regression loss: 0.63589 | Running loss:2.54725
+2021-07-04 23:02:26,268 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 240/1253 | Classification loss: 0.63555 | Regression loss: 0.63332 | Running loss:2.53499
+2021-07-04 23:02:41,700 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 260/1253 | Classification loss: 0.87667 | Regression loss: 0.65210 | Running loss:2.52928
+2021-07-04 23:02:56,656 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 280/1253 | Classification loss: 0.78786 | Regression loss: 0.65747 | Running loss:2.52191
+2021-07-04 23:03:12,339 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 300/1253 | Classification loss: 0.70838 | Regression loss: 0.62732 | Running loss:2.51514
+2021-07-04 23:03:27,101 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 320/1253 | Classification loss: 0.78368 | Regression loss: 0.62603 | Running loss:2.50941
+2021-07-04 23:03:42,253 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 340/1253 | Classification loss: 0.63148 | Regression loss: 0.68429 | Running loss:2.50438
+2021-07-04 23:03:57,374 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 360/1253 | Classification loss: 0.73979 | Regression loss: 0.69013 | Running loss:2.49980
+2021-07-04 23:04:12,598 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 380/1253 | Classification loss: 0.66728 | Regression loss: 0.66349 | Running loss:2.49487
+2021-07-04 23:04:27,435 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 400/1253 | Classification loss: 0.74934 | Regression loss: 0.64055 | Running loss:2.48945
+2021-07-04 23:04:42,678 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 420/1253 | Classification loss: 0.67390 | Regression loss: 0.63136 | Running loss:2.48714
+2021-07-04 23:04:58,069 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 440/1253 | Classification loss: 0.63820 | Regression loss: 0.65701 | Running loss:2.48224
+2021-07-04 23:05:12,736 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 460/1253 | Classification loss: 0.94166 | Regression loss: 0.67114 | Running loss:2.47810
+2021-07-04 23:05:27,557 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 480/1253 | Classification loss: 0.62620 | Regression loss: 0.64661 | Running loss:2.47522
+2021-07-04 23:05:43,565 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 500/1253 | Classification loss: 0.76140 | Regression loss: 0.67711 | Running loss:2.47205
+2021-07-04 23:05:58,183 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 520/1253 | Classification loss: 0.68191 | Regression loss: 0.64601 | Running loss:2.45574
+2021-07-04 23:06:13,232 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 540/1253 | Classification loss: 0.70425 | Regression loss: 0.63335 | Running loss:2.44472
+2021-07-04 23:06:28,997 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 560/1253 | Classification loss: 0.79585 | Regression loss: 0.69963 | Running loss:2.43705
+2021-07-04 23:06:44,287 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 580/1253 | Classification loss: 0.76103 | Regression loss: 0.66083 | Running loss:2.42881
+2021-07-04 23:06:59,864 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 600/1253 | Classification loss: 0.81278 | Regression loss: 0.63059 | Running loss:2.42065
+2021-07-04 23:07:14,883 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 620/1253 | Classification loss: 0.61276 | Regression loss: 0.67727 | Running loss:2.41298
+2021-07-04 23:07:30,939 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 640/1253 | Classification loss: 0.83836 | Regression loss: 0.64981 | Running loss:2.40775
+2021-07-04 23:07:45,135 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 660/1253 | Classification loss: 0.61570 | Regression loss: 0.70033 | Running loss:2.40141
+2021-07-04 23:08:00,736 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 680/1253 | Classification loss: 0.67884 | Regression loss: 0.62572 | Running loss:2.39706
+2021-07-04 23:08:15,908 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 700/1253 | Classification loss: 0.83709 | Regression loss: 0.66060 | Running loss:2.39219
+2021-07-04 23:08:31,246 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 720/1253 | Classification loss: 0.73568 | Regression loss: 0.64524 | Running loss:2.38508
+2021-07-04 23:08:46,092 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 740/1253 | Classification loss: 0.54009 | Regression loss: 0.61176 | Running loss:2.37810
+2021-07-04 23:09:00,466 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 760/1253 | Classification loss: 0.71652 | Regression loss: 0.67299 | Running loss:2.36822
+2021-07-04 23:09:15,228 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 780/1253 | Classification loss: 0.71935 | Regression loss: 0.66803 | Running loss:2.35845
+2021-07-04 23:09:30,012 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 800/1253 | Classification loss: 0.60381 | Regression loss: 0.64691 | Running loss:2.34538
+2021-07-04 23:09:44,978 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 820/1253 | Classification loss: 0.86407 | Regression loss: 0.62455 | Running loss:2.33123
+2021-07-04 23:10:00,287 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 840/1253 | Classification loss: 0.76597 | Regression loss: 0.67987 | Running loss:2.31573
+2021-07-04 23:10:15,278 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 860/1253 | Classification loss: 0.69926 | Regression loss: 0.64218 | Running loss:2.29859
+2021-07-04 23:10:30,256 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 880/1253 | Classification loss: 0.80997 | Regression loss: 0.66046 | Running loss:2.28022
+2021-07-04 23:10:45,240 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 900/1253 | Classification loss: 0.72329 | Regression loss: 0.64731 | Running loss:2.26076
+2021-07-04 23:11:00,766 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 920/1253 | Classification loss: 0.70178 | Regression loss: 0.66842 | Running loss:2.23969
+2021-07-04 23:11:15,735 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 940/1253 | Classification loss: 0.89073 | Regression loss: 0.69198 | Running loss:2.22375
+2021-07-04 23:11:30,343 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 960/1253 | Classification loss: 0.62507 | Regression loss: 0.65884 | Running loss:2.20458
+2021-07-04 23:11:46,203 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 980/1253 | Classification loss: 0.88857 | Regression loss: 0.65127 | Running loss:2.18567
+2021-07-04 23:12:01,638 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1000/1253 | Classification loss: 0.72922 | Regression loss: 0.65032 | Running loss:2.16721
+2021-07-04 23:12:15,781 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1020/1253 | Classification loss: 0.72060 | Regression loss: 0.65976 | Running loss:2.14870
+2021-07-04 23:12:31,075 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1040/1253 | Classification loss: 0.63499 | Regression loss: 0.63872 | Running loss:2.13205
+2021-07-04 23:12:46,031 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1060/1253 | Classification loss: 0.72283 | Regression loss: 0.64747 | Running loss:2.11026
+2021-07-04 23:13:01,061 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1080/1253 | Classification loss: 0.59290 | Regression loss: 0.64485 | Running loss:2.09004
+2021-07-04 23:13:16,230 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1100/1253 | Classification loss: 0.72848 | Regression loss: 0.68276 | Running loss:2.07235
+2021-07-04 23:13:30,119 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1120/1253 | Classification loss: 0.88734 | Regression loss: 0.63693 | Running loss:2.05528
+2021-07-04 23:13:45,226 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1140/1253 | Classification loss: 0.81957 | Regression loss: 0.62175 | Running loss:2.03844
+2021-07-04 23:14:00,200 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1160/1253 | Classification loss: 0.70053 | Regression loss: 0.65720 | Running loss:2.01982
+2021-07-04 23:14:14,434 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1180/1253 | Classification loss: 0.68229 | Regression loss: 0.65091 | Running loss:2.00052
+2021-07-04 23:14:29,792 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1200/1253 | Classification loss: 0.72734 | Regression loss: 0.61746 | Running loss:1.98416
+2021-07-04 23:14:44,716 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1220/1253 | Classification loss: 0.77969 | Regression loss: 0.67488 | Running loss:1.97116
+2021-07-04 23:14:59,692 - fcos_vocdataset - INFO - Epoch: 0 | Iteration: 1240/1253 | Classification loss: 0.69211 | Regression loss: 0.65075 | Running loss:1.95631

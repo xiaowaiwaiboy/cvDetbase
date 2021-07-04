@@ -22,7 +22,7 @@ class json_file(FileBase):
     @staticmethod
     def save(dict_config: dict, save_path: str):
         cfg = json.dumps(dict_config)
-        with open(r'{}'.format(save_path) + '/cfg.json', 'w') as f:
+        with open(r'{}'.format(save_path), 'w') as f:
             f.write(cfg)
 
     @staticmethod
@@ -34,9 +34,9 @@ class json_file(FileBase):
     def show(cfg: dict or str):
         if isinstance(cfg, dict):
             print(json.dumps(cfg, indent=4))
-        elif isinstance(cfg, str) and cfg.split('.')[-1] == 'json':
+        elif isinstance(cfg, str) and cfg.endswith('json'):
             print(json.dumps(json_file.load(cfg), indent=2))
         else:
-            raise ValueError
+            raise TypeError(f'File to show must be a dict or json file! But got {type(cfg)} instead.')
 
 

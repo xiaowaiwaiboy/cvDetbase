@@ -23,7 +23,7 @@ detector:
       feat_channels: 256
       prior: 0.01
       cnt_on_reg: True
-      norm: 'BN'
+      norm: 'GN'
     loss_:
       cfg: 'fcos_loss'
       cls_loss:
@@ -41,23 +41,23 @@ detector:
     add_centerness: True
 
 optimizer:
-  cfg: 'SGD'
-  lr: 0.01
-  momentum: 0.9
-  weight_decay: 0.0001
+  cfg: 'Adam'
+  lr: 0.001
+#  momentum: 0.9
+#  weight_decay: 0.0001
 
 dataset_train:
       cfg: 'VOCDataset'
       batch_size: 4
       img_sizes: [480, 640]
-      train_set: "[('2007', 'trainval')]"
+      train_set: "[('2007', 'trainval_mini')]"
       root_dir: 'H:/DataSets/VOCdevkit0712/VOCdevkit'
-      is_train: False
+      is_train: True
 
 dataset_eval:
       cfg: 'VOCDataset'
       batch_size: 1
       img_sizes: [480, 640]
-      train_set: "[('2007', 'test')]"
+      train_set: "[('2007', 'test_mini')]"
       root_dir: 'H:/DataSets/VOCdevkit0712/VOCdevkit'
       is_train: False
