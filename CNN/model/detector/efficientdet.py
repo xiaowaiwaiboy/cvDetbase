@@ -174,24 +174,21 @@ class ClipBoxes(nn.Module):
 
 @DETECTORS.register_module()
 class EfficientDet(nn.Module):
-    def __init__(self,  mode=None, encoder=None, generator=None, decoder=None):
+    def __init__(self, encoder=None, generator=None, decoder=None):
         super(EfficientDet, self).__init__()
-        self.mode = mode
         self.encoder = Encoder(encoder)
         self.get_anchors = build_generator(generator)
-        if self.mode == 'training':
-            self.loss_func = build_loss(cfg=encoder.get('loss_'))
-        else:
-            self.decoder = Decoder(**decoder)
+        self.loss_func = build_loss(cfg=encoder.get('loss_'))
+        self.decoder = Decoder(**decoder)
 
     def forward(self, inputs):
-        if self.mode == 'training':
+        if self.training:
             batch_images, boxes, classes = inputs
             anchors = self.get_anchors(batch_images)
             cls_logits, reg_preds = self.encoder(batch_images)
             loss = self.loss_func([cls_logits, reg_preds, anchors, boxes, classes])
             return loss
-        elif self.mode == 'inference':
+        else:
             batch_images = inputs
             anchors = self.get_anchors(batch_images)
             cls_logits, reg_preds = self.encoder(batch_images)

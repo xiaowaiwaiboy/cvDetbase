@@ -2,23 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be68ab11-ea33-4dd2-8622-42929e9b8908" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CNN/model/detector/fcos.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/generator/target_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNN/model/loss/fcos_loss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/fcos_fpn_r50.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eval_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/collect_env.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/detector/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CNN/model/detector/efficientdet.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/efficientdet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/detector/fcos.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/fcos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CNN/model/detector/retinanet.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/retinanet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/generator/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/generator/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/head/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/head/efficientdet_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/efficientdet_head.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/loss/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/loss/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/utils/base_conv.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/utils/base_conv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/efficientdet_fpn.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/efficientdet_fpn.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/retinanet_fpn_r50.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/retinanet_fpn_r50.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/fcos_fpn_r50.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/fcos_fpn_r50.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/files.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,15 +39,15 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CNN/model/neck" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/utils" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\pycharm_projects\cvDetbase\utils" />
       <recent name="G:\pycharm_projects\cvDetbase\CNN\model\neck" />
       <recent name="G:\pycharm_projects\cvDetbase\CNN\model\backbone" />
       <recent name="G:\pycharm_projects\cvDetbase\CNN\model\backbone\efficientnet" />
       <recent name="G:\pycharm_projects\cvDetbase\cnn_model\model\backbone" />
-      <recent name="G:\pycharm_projects\cvDetbase\cnn_model\model\backbone\mobilenet" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\pycharm_projects\cvDetbase\CNN\model\backbone\efficientnet" />

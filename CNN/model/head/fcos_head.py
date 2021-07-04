@@ -39,17 +39,20 @@ class FCOSHead(nn.Module):
             self.reg_convs.append(
                 Conv_Module(in_chn, feat_channel, 3, 1, 1, activation=nn.ReLU(inplace=True), norm=norm)
             )
-        self.cls = Conv_Module(feat_channel, num_classes, 3, 1, 1)
+        # self.cls = Conv_Module(feat_channel, num_classes, 3, 1, 1)
+        self.cls = nn.Conv2d(feat_channel, num_classes, kernel_size=(3, 3), padding=(1, 1))
         self.reg = Conv_Module(feat_channel, 4, 3, 1, 1)
         self.cnt = Conv_Module(in_channel, 1, 3, 1, 1)
         self.apply(self.init_conv_RandomNormal)
+        nn.init.constant_(self.cls.bias, -math.log((1 - prior) / prior))
         self.scale_exp = ScaleExp(1.0)
 
-    def init_conv_RandomNormal(self, module, std=0.01):
+    @staticmethod
+    def init_conv_RandomNormal(module, std=0.01):
         if isinstance(module, nn.Conv2d):
             nn.init.normal_(module.weight, std=std)
             if module.bias is not None:
-                nn.init.constant_(module.bias, -math.log((1 - self.prior) / self.prior))
+                nn.init.constant_(module.bias, 0)
 
     def forward_single(self, x):
         cls_feat = x

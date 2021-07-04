@@ -347,25 +347,22 @@ class ClipBoxes(nn.Module):
 
 @DETECTORS.register_module()
 class FCOS(nn.Module):
-    def __init__(self, mode=None, encoder=None, generator=None, decoder=None, **kwargs):
+    def __init__(self, encoder=None, generator=None, decoder=None, **kwargs):
         super(FCOS, self).__init__()
-        self.mode = mode
         self.encoder = Encoder(encoder)
-        if self.mode == 'training':
-            self.targt_layer = build_generator(generator)
-            self.loss_func = build_loss(cfg=encoder.get('loss_'))
-        elif self.mode == 'inference':
-            self.decoder = Decoder(**decoder, strides=generator['strides'])
-            self.clip_boxes = ClipBoxes()
+        self.targt_layer = build_generator(generator)
+        self.loss_func = build_loss(cfg=encoder.get('loss_'))
+        self.decoder = Decoder(**decoder, strides=generator['strides'])
+        self.clip_boxes = ClipBoxes()
 
     def forward(self, inputs):
-        if self.mode == 'training':
+        if self.training:
             batch_images, boxes, classes = inputs
             cls_logits, reg_preds, cnt_logits = self.encoder(batch_images)
             targets = self.targt_layer([cls_logits, reg_preds, cnt_logits, boxes, classes])
             loss = self.loss_func([cls_logits, reg_preds, cnt_logits, targets])
             return loss
-        elif self.mode == 'inference':
+        else:
             batch_images = inputs
             cls_logits, reg_preds, cnt_logits = self.encoder(batch_images)
             cls_scores, cls_idxs, boxes = self.decoder([cls_logits, cnt_logits, reg_preds])
