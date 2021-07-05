@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be68ab11-ea33-4dd2-8622-42929e9b8908" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/eval_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/collect_env.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/detector/efficientdet.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/efficientdet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/detector/fcos.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/fcos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/detector/retinanet.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/detector/retinanet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/data/VOC0712.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/data/VOC0712.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/fcos_fpn_r50.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/fcos_fpn_r50.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logger.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -21,11 +21,10 @@ from eval_model import mAP_compute
 parser = argparse.ArgumentParser()
 parser.add_argument('--config_file', type=str, default='config/fcos_fpn_r50.yaml')
 parser.add_argument('--resume-from', type=str, default=None)
-parser.add_argument('--epochs', type=int, default=20, help='number of total epochs')
-parser.add_argument('--save_epochs', type=int, default=10, help='when to save weights')
+parser.add_argument('--epochs', type=int, default=2, help='number of total epochs')
+parser.add_argument('--save_epochs', type=int, default=1, help='when to save weights')
 parser.add_argument('--num_workers', type=int, default=4)
 parser.add_argument('--n_gpu', type=str, default='0')
-parser.add_argument('--lr', type=float, default=0.001)
 parser.add_argument('--log_iter', type=int, default=20)
 parser.add_argument('--eval_epoch', type=int, default=1)
 opt = parser.parse_args()
@@ -43,13 +42,14 @@ train_cfg = config.get('dataset_train')
 eval_cfg = config.get('dataset_eval')
 
 timestamp = time.strftime('%Y%m%d_%H%M%S', time.localtime())
-logpath = f'runs/{model_cfg["cfg"]}_{train_cfg["cfg"]}'.lower()
+logpath = f'runs/{model_cfg["cfg"]}_{train_cfg["cfg"]}/{timestamp}'.lower()
 if not osp.exists(logpath):
     os.makedirs(logpath)
 json_file.save(config, osp.join(logpath, f'{timestamp}.json'))
 writer = SummaryWriter(logdir=logpath, filename_suffix=f'_{timestamp}')
 log_file = osp.join(logpath, f'{timestamp}.log')
-logger = get_root_logger(name=f'{model_cfg["cfg"]}_{train_cfg["cfg"]}'.lower(), log_file=log_file, log_level='INFO')
+logger = get_root_logger(name=f'{model_cfg["cfg"]}_{train_cfg["cfg"]}'.lower(), log_file=log_file, log_level='INFO',
+                         format_='%(message)s')
 env_info_dict = collect_env()
 env_info = '\n'.join([f'{k}: {v}' for k, v in env_info_dict.items()])
 dash_line = '-' * 60 + '\n'
@@ -119,7 +119,7 @@ for epoch in range(opt.epochs):
         mAP = mAP_compute(model, eval_loader, logger)
         if mAP > best_map:
             best_map = mAP
-            torch.save(model.state_dict(), f'{logpath}/epoch_{epoch + 1}_{mAP}.pth')
+            torch.save(model.state_dict(), '{}/epoch_{}_{:.3f}.pth'.format(logpath, epoch+1, mAP))
             config['epoch'] = epoch
             json_file.save(config, osp.join(logpath, f'{timestamp}.json'))
 

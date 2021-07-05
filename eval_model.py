@@ -1,8 +1,11 @@
-import time
+import logging
 
+from CNN.data import VOCDataset
 import torch
 import numpy as np
 from tqdm import tqdm
+import pandas as pd
+from utils import get_root_logger
 
 
 def sort_by_score(pred_boxes, pred_labels, pred_scores):
@@ -132,9 +135,12 @@ def eval_ap_2d(gt_boxes, gt_labels, pred_boxes, pred_labels, pred_scores, iou_th
 
 def mAP_compute(model, data_loader, logger):
     model = torch.nn.DataParallel(model)
-
     model.cuda().eval()
-    logger.info('success loading model')
+
+    dash_line = '-' * 60 + '\n'
+    logger.info(dash_line)
+    logger.info('validating model')
+
     gt_boxes = []
     gt_classes = []
     pred_boxes = []
@@ -157,17 +163,19 @@ def mAP_compute(model, data_loader, logger):
         #     pred_scores.append(out[0].squeeze().cpu().numpy())
         # gt_boxes.append(boxes[0].numpy())
         # gt_classes.append(classes[0].numpy())
-
+    class_name = VOCDataset.CLASSES_NAME
     pred_boxes, pred_classes, pred_scores = sort_by_score(pred_boxes, pred_classes, pred_scores)
-    all_AP = eval_ap_2d(gt_boxes, gt_classes, pred_boxes, pred_classes, pred_scores, 0.5, 21)
-    dash_line = '-' * 60 + '\n'
-    logger.info('mAP:\n' + dash_line)
-    logger.info('class | AP')
+    all_AP = eval_ap_2d(gt_boxes, gt_classes, pred_boxes, pred_classes, pred_scores, 0.5, len(class_name))
+    ap = []
+
     for key, value in all_AP.items():
-        logger.info('{} | {}'.format(key, value))
+        ap.append(['{}'.format(class_name[key]), value])
     mAP = 0.
     for class_id, class_mAP in all_AP.items():
         mAP += float(class_mAP)
-    mAP /= 20
-    logger.info(dash_line + '{:1.3f}'.format(mAP))
+    mAP /= (len(class_name) - 1)
+    ap.append(['mAP', mAP])
+    ap_df = pd.DataFrame(ap, columns=['Class', 'AP'])
+
+    logger.info(ap_df)
     return mAP

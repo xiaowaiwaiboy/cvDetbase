@@ -230,7 +230,6 @@ class VOCDataset(Dataset):
         self.std = [0.229, 0.224, 0.225]
         self.train = is_train
         self.transform = transform
-        print("INFO=====>voc dataset init finished  ! !")
 
     def __len__(self):
         return len(self.img_ids)

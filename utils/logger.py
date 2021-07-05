@@ -5,7 +5,7 @@ import torch.distributed as dist
 logger_initialized = {}
 
 
-def get_logger(name, log_file=None, log_level=logging.INFO):
+def get_logger(name, log_file=None, log_level=logging.INFO, format_=None):
     """Initialize and get a logger by name.
 
     If the logger has not been initialized, this method will initialize the
@@ -15,6 +15,7 @@ def get_logger(name, log_file=None, log_level=logging.INFO):
     will also be added.
 
     Args:
+        format_: handler formatter.
         name (str): Logger name.
         log_file (str | None): The log filename. If specified, a FileHandler
             will be added to the logger.
@@ -48,8 +49,10 @@ def get_logger(name, log_file=None, log_level=logging.INFO):
         file_handler = logging.FileHandler(log_file, 'w')
         handlers.append(file_handler)
 
-    formatter = logging.Formatter(
-        '%(name)s - %(message)s')
+    if format_ is not None:
+        formatter = logging.Formatter(format_)
+    else:
+        formatter = logging.Formatter('%(name)s - %(message)s')
     # formatter = logging.Formatter(
     #     '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     for handler in handlers:
@@ -95,10 +98,11 @@ def print_log(msg, logger=None, level=logging.INFO):
             f'"silent" or None, but got {type(logger)}')
 
 
-def get_root_logger(name=None, log_file=None, log_level=logging.INFO):
+def get_root_logger(name=None, log_file=None, log_level=logging.INFO, format_=None):
     """Get root logger.
 
     Args:
+        format_: handler format.
         name: logger name.
         log_file (str, optional): File path of log. Defaults to None.
         log_level (int, optional): The level of logger.
@@ -107,6 +111,6 @@ def get_root_logger(name=None, log_file=None, log_level=logging.INFO):
     Returns:
         :obj:`logging.Logger`: The obtained logger
     """
-    logger = get_logger(name=name, log_file=log_file, log_level=log_level)
+    logger = get_logger(name=name, log_file=log_file, log_level=log_level, format_=format_)
 
     return logger
