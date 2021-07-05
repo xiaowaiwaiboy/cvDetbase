@@ -50,7 +50,7 @@ dataset_train:
       cfg: 'VOCDataset'
       batch_size: 4
       img_sizes: [480, 640]
-      train_set: "[('2007', 'trainval')]"
+      train_set: "[('2007', 'trainval_mini')]"
       root_dir: 'H:/DataSets/VOCdevkit0712/VOCdevkit'
       is_train: True
 
@@ -58,6 +58,6 @@ dataset_eval:
       cfg: 'VOCDataset'
       batch_size: 1
       img_sizes: [480, 640]
-      train_set: "[('2007', 'test')]"
+      train_set: "[('2007', 'test_mini')]"
       root_dir: 'H:/DataSets/VOCdevkit0712/VOCdevkit'
       is_train: False

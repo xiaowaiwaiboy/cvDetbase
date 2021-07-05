@@ -80,7 +80,7 @@ def eval_ap_2d(gt_boxes, gt_labels, pred_boxes, pred_labels, pred_scores, iou_th
     :param num_cls: eg. 4, total number of class including background which is equal to 0
     :return: a dict containing average precision for each cls
     """
-    all_ap = {}
+    all_ap = []
     for label in range(num_cls)[1:]:
         # for label in range(num_cls):
         # get samples with specific label
@@ -128,16 +128,16 @@ def eval_ap_2d(gt_boxes, gt_labels, pred_boxes, pred_labels, pred_scores, iou_th
         recall = tp / total_gts
         precision = tp / np.maximum(tp + fp, np.finfo(np.float64).eps)
         ap = _compute_ap(recall, precision)
-        all_ap[label] = ap
+        all_ap.append({'Class': label, 'AP': ap})
         # print(recall, precision)
     return all_ap
 
 
-def mAP_compute(model, data_loader, logger):
+def mAP_compute(model, data_loader, logger, iou_thresh):
     model = torch.nn.DataParallel(model)
     model.cuda().eval()
 
-    dash_line = '-' * 60 + '\n'
+    dash_line = '\n' + '-' * 60
     logger.info(dash_line)
     logger.info('validating model')
 
@@ -165,17 +165,16 @@ def mAP_compute(model, data_loader, logger):
         # gt_classes.append(classes[0].numpy())
     class_name = VOCDataset.CLASSES_NAME
     pred_boxes, pred_classes, pred_scores = sort_by_score(pred_boxes, pred_classes, pred_scores)
-    all_AP = eval_ap_2d(gt_boxes, gt_classes, pred_boxes, pred_classes, pred_scores, 0.5, len(class_name))
+    all_AP = eval_ap_2d(gt_boxes, gt_classes, pred_boxes, pred_classes, pred_scores, iou_thresh, len(class_name))
     ap = []
-
-    for key, value in all_AP.items():
-        ap.append(['{}'.format(class_name[key]), value])
     mAP = 0.
-    for class_id, class_mAP in all_AP.items():
-        mAP += float(class_mAP)
+    for value in all_AP:
+        value['Class'] = class_name[value['Class']]
+        mAP += float(value['AP'])
+        ap.append(value)
     mAP /= (len(class_name) - 1)
-    ap.append(['mAP', mAP])
-    ap_df = pd.DataFrame(ap, columns=['Class', 'AP'])
-
+    ap.append({'Class': 'mAP', 'AP': mAP})
+    ap_df = pd.DataFrame(ap)
     logger.info(ap_df)
+    logger.info('-' * 60 + '\n')
     return mAP
