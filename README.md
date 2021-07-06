@@ -6,8 +6,8 @@
 
 
 Some things to note are:   
-- The parameter ‘out_indices’ of the backbone network configuration must match the input of neck.  
-- This base only integrates excellent open source detection projects for ease of use, so the code style of each target detection model may be completely different.
+- The parameter `out_indices` of the backbone network configuration must match the input of neck.  
+- This base only integrates excellent open source detection projects for ease of use, so the code style of each object detection model may be completely different.
 
 
 Supported now:  
