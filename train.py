@@ -15,7 +15,6 @@ import os
 from utils import json_file
 import torch
 from utils import collect_env, get_root_logger
-from tqdm import tqdm
 from eval_model import mAP_compute
 
 parser = argparse.ArgumentParser()
@@ -28,7 +27,7 @@ parser.add_argument('--n_gpu', type=str, default='0')
 parser.add_argument('--log_iter', type=int, default=20)
 parser.add_argument('--eval_epoch', type=int, default=1)
 opt = parser.parse_args()
-
+os.environ["CUDA_VISIBLE_DEVICES"] = opt.n_gpu
 if opt.resume_from is not None:
     config = json_file.load(opt.resume_from)
     weights = torch.load(f'epoch_{config["epoch"]}')
@@ -109,14 +108,14 @@ for epoch in range(opt.epochs):
         if batch_step % opt.log_iter == 0:
             logger.info(
                 'Epoch: {} | Iteration: {}/{} | Classification loss: {:1.5f} | Regression loss: {:1.5f} | Running loss:'
-                '{:1.5f}'.format(epoch, batch_step, len(train_loader), float(cls_loss), float(reg_loss), np.mean(loss_hist))
+                '{:1.5f}'.format(epoch+1, batch_step, len(train_loader), float(cls_loss), float(reg_loss), np.mean(loss_hist))
             )
         del losses
 
     if epoch % opt.eval_epoch == 0:
         model.training = False
         model.eval()
-        mAP = mAP_compute(model, eval_loader, logger)
+        mAP = mAP_compute(model, eval_loader, logger, iou_thresh=0.7)
         if mAP > best_map:
             best_map = mAP
             torch.save(model.state_dict(), '{}/epoch_{}_{:.3f}.pth'.format(logpath, epoch+1, mAP))

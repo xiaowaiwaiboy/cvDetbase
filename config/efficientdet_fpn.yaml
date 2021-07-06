@@ -10,7 +10,7 @@ detector:
   encoder:
     backbone_:
       cfg: 'efficientnet_b8'
-      pretrained: False
+      pretrained: True
       include_top: False
       out_indices: [19, 41, 60]
     neck_:

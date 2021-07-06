@@ -239,7 +239,7 @@ class VOCDataset(Dataset):
         img_id = self.img_ids[index]
         img = self.load_image(img_id)
         annot = self.load_annotations(img_id)
-        sample = {'img': img, 'annot': annot}
+        sample = {'img': img, 'annot': annot, 'id': img_id}
         if self.transform:
             sample = self.transform(sample)
         return sample
@@ -305,6 +305,7 @@ def collate_fn(sample):
     imgs_list = [s['img'] for s in sample]
     annots_list = [s['annot'] for s in sample]
     scales = [s['scale'] for s in sample]
+    ids = [s['id'] for s in sample]
     assert len(imgs_list) == len(annots_list)
     batch_size = len(annots_list)
     pad_imgs_list = []
@@ -328,7 +329,7 @@ def collate_fn(sample):
             torch.nn.functional.pad(annots_list[i], (0, 0, 0, max_num - annots_list[i].shape[0]), value=-1))
     batch_imgs = torch.stack(pad_imgs_list).permute(0, 3, 1, 2)
     batch_annots = torch.stack(pad_annots_list)
-    return {'img': batch_imgs, 'annot': batch_annots, 'scale': scales}
+    return {'img': batch_imgs, 'annot': batch_annots, 'scale': scales, 'id': ids}
 
 
 class Resizer_(object):
@@ -385,9 +386,11 @@ class Resizer(object):
         else:
             annots[..., [0, 2]] = annots[..., [0, 2]] * scale
             annots[..., [1, 3]] = annots[..., [1, 3]] * scale
-
-            return {'img': torch.from_numpy(image_paded).to(torch.float32), 'annot': torch.from_numpy(annots),
-                    'scale': scale}
+            sample['img'], sample['annot'], sample['scale'] = \
+                torch.from_numpy(image_paded).to(torch.float32), torch.from_numpy(annots), scale
+            return sample
+            # return {'img': torch.from_numpy(image_paded).to(torch.float32), 'annot': torch.from_numpy(annots),
+            #         'scale': scale}
 
 
 class Augmenter(object):
@@ -407,7 +410,8 @@ class Augmenter(object):
             annots[:, 0] = cols - x2
             annots[:, 2] = cols - x_tmp
 
-            sample = {'img': image, 'annot': annots}
+            sample['img'], sample['annot'] = image, annots
+            # sample = {'img': image, 'annot': annots}
 
         return sample
 
@@ -424,8 +428,11 @@ class Normalizer(object):
 
     def __call__(self, sample):
         image, annots = sample['img'], sample['annot']
+        sample['img'] = ((image.astype(np.float32) - self.mean) / self.std)
+        sample['annot'] = annots
+        return sample
 
-        return {'img': ((image.astype(np.float32) - self.mean) / self.std), 'annot': annots}
+        # return {'img': ((image.astype(np.float32) - self.mean) / self.std), 'annot': annots}
 
 
 if __name__ == "__main__":
