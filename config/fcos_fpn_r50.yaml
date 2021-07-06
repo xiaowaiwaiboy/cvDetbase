@@ -8,7 +8,7 @@ detector:
   encoder:
     backbone_:
       cfg: 'resnet50'
-      pretrained: False
+      pretrained: True
       include_top: False
       out_indices: [3, 4, 5]
       norm: 'BN'
