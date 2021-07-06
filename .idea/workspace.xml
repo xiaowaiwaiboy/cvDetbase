@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be68ab11-ea33-4dd2-8622-42929e9b8908" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CNN/data/COCO.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/CAM_vis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/dataset_vis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/data/VOC0712.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/data/VOC0712.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/data/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/efficientdet_fpn.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/efficientdet_fpn.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/fcos_fpn_r50.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/fcos_fpn_r50.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
