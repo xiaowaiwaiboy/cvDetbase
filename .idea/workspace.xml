@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be68ab11-ea33-4dd2-8622-42929e9b8908" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ViT/model/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ViT/model/self-attention-block.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/backbone/efficientnet/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/backbone/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/backbone/resnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/CAM_vis.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/CAM_vis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +49,7 @@
       <recent name="G:\pycharm_projects\cvDetbase" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.CAM_vis">
+  <component name="RunManager" selected="Python.train">
     <configuration name="CAM_vis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="cvDetbase" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -88,7 +92,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="optimizer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="self-attention-block" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="cvDetbase" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -96,11 +100,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cnn_model" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ViT/model" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cnn_model/optimizer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ViT/model/self-attention-block.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -153,11 +157,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train" />
+        <item itemvalue="Python.self-attention-block" />
         <item itemvalue="Python.CAM_vis" />
         <item itemvalue="Python.dataset_vis" />
-        <item itemvalue="Python.train" />
         <item itemvalue="Python.test_model" />
-        <item itemvalue="Python.optimizer" />
       </list>
     </recent_temporary>
   </component>

@@ -183,6 +183,7 @@ class resnet50(nn.Module):
     def build_model(self, **kwargs):
         model = ResNet(self.block, self.layers, **kwargs)
         if self.pretrained:
+            print('load pretrained resnet50')
             model.load_state_dict(model_zoo.load_url(model_urls['resnet50']), strict=False)
         return model
 
