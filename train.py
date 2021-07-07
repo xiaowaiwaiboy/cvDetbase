@@ -64,6 +64,7 @@ else:
 
 
 train_dataset = build_dataset(cfg=train_cfg, transform=transforms.Compose([Augmenter(),
+                                                                           Normalizer(),
                                                                           Resizer(img_sizes=train_cfg.get('img_sizes'))]))
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=train_cfg.get('batch_size'), collate_fn=collate_fn)
 

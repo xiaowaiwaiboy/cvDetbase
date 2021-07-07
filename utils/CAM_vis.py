@@ -1,5 +1,7 @@
+import numpy as np
+
 from CNN.model import build_backbone, build_neck, build_head, build_detector
-from CNN.data import build_dataset, Resizer, Augmenter, collate_fn
+from CNN.data import build_dataset, Resizer, Augmenter, collate_fn, Normalizer
 import torch.utils.data
 import yaml
 import torch
@@ -11,6 +13,7 @@ data_cfg = config.get('dataset_eval')
 dataset = build_dataset(data_cfg)
 train_dataset = build_dataset(cfg=data_cfg,
                               transform=transforms.Compose([Augmenter(),
+                                                            Normalizer(),
                                                             Resizer(img_sizes=data_cfg.get('img_sizes'))]))
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=1, collate_fn=collate_fn)
 
@@ -18,14 +21,36 @@ model = build_detector(model_cfg)
 model = torch.nn.DataParallel(model).cuda()
 
 
+def deprocess_img(x):
+    x -= x.mean()
+    x /= (x.std() + 1e-5)
+    x *= 0.1
+
+    x += 0.5
+    x = np.clip(x.cpu().detach().numpy(), 0, 1)
+
+    x *= 255
+    x = np.clip(x, 0, 255).astype('uint8')
+    return x
+
+
 def CAM_(featuremap):
     import numpy as np
     import cv2
     import matplotlib.pyplot as plt
     # start_t=time.time()
-
     B, C, H, W = featuremap.shape
     heat_map = torch.clamp_min(featuremap, 0)
+
+    # heat_map -= heat_map.mean()
+    # heat_map /= (heat_map.std() + 1e-5)
+    # heat_map *= 0.1
+    # heatmap = heat_map.data.cpu().numpy()
+    # heatmap = heatmap.squeeze(0)
+    # heatmap = np.uint8(255 * heatmap)
+    # plt.imshow(heatmap)
+    # plt.show()
+
     heat_map = torch.mean(heat_map, dim=1)
     max = heat_map.reshape(B, H * W).max(dim=1).values
     heat_map /= max.view(B, 1, 1)
@@ -35,7 +60,7 @@ def CAM_(featuremap):
     heatmap = heatmap.squeeze(0)
     heatmap = np.uint8(255 * heatmap)
     heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
-    heatmap = cv2.resize(heatmap, (640, 480))
+    heatmap = cv2.resize(heatmap, (480, 640))
     cv2.imshow('hm', heatmap)
     cv2.waitKey(0)
 

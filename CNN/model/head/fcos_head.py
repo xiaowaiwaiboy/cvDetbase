@@ -1,3 +1,4 @@
+import netbios
 import torch
 import torch.nn as nn
 from CNN.model.utils import HEADS, Conv_Module, multi_apply
@@ -25,8 +26,10 @@ class FCOSHead(nn.Module):
                  norm=None,
                  **kwargs):
         super(FCOSHead, self).__init__()
-        self.cls_convs = nn.ModuleList()
-        self.reg_convs = nn.ModuleList()
+        self.cls_convs = []
+        # self.cls_convs = nn.ModuleList()
+        self.reg_convs = []
+        # self.reg_convs = nn.ModuleList()
         self.prior = prior
         self.class_num = num_classes
         self.cnt_on_reg = cnt_on_reg
@@ -40,12 +43,15 @@ class FCOSHead(nn.Module):
                 Conv_Module(in_chn, feat_channel, 3, 1, 1, activation=nn.ReLU(inplace=True), norm=norm)
             )
         # self.cls = Conv_Module(feat_channel, num_classes, 3, 1, 1)
+        self.cls_convs = nn.Sequential(*self.cls_convs)
+        self.reg_convs = nn.Sequential(*self.reg_convs)
         self.cls = nn.Conv2d(feat_channel, num_classes, kernel_size=(3, 3), padding=(1, 1))
         self.reg = Conv_Module(feat_channel, 4, 3, 1, 1)
         self.cnt = Conv_Module(in_channel, 1, 3, 1, 1)
         self.apply(self.init_conv_RandomNormal)
         nn.init.constant_(self.cls.bias, -math.log((1 - prior) / prior))
-        self.scale_exp = ScaleExp(1.0)
+        # self.scale_exp = ScaleExp(1.0)
+        self.scale_exp = nn.ModuleList([ScaleExp(1.0) for _ in range(5)])
 
     @staticmethod
     def init_conv_RandomNormal(module, std=0.01):
@@ -54,24 +60,41 @@ class FCOSHead(nn.Module):
             if module.bias is not None:
                 nn.init.constant_(module.bias, 0)
 
-    def forward_single(self, x):
-        cls_feat = x
-        reg_feat = x
-        for cls_conv in self.cls_convs:
-            cls_feat = cls_conv(cls_feat)
-        for reg_conv in self.reg_convs:
-            reg_feat = reg_conv(reg_feat)
-        if not self.cnt_on_reg:
-            cnt_feat = self.cnt(cls_feat)
-        else:
-            cnt_feat = self.cnt(reg_feat)
-        cls_score = self.cls(cls_feat)
-        bbox_pred = self.scale_exp(self.reg(reg_feat))
-        return cls_score, bbox_pred, cnt_feat
+    def forward(self, inputs):
+        """inputs:[P3~P7]"""
+        cls_logits = []
+        cnt_logits = []
+        reg_preds = []
+        for index in range(len(inputs)):
+            P = inputs[index]
+            cls_conv_out = self.cls_convs(P)
+            reg_conv_out = self.reg_convs(P)
 
-    def forward(self, feats):
-        cls_scores, bbox_preds, cnt_feats = multi_apply(self.forward_single, feats)
-        return cls_scores, bbox_preds, cnt_feats
+            cls_logits.append(self.cls(cls_conv_out))
+            if not self.cnt_on_reg:
+                cnt_logits.append(self.cnt(cls_conv_out))
+            else:
+                cnt_logits.append(self.cnt(reg_conv_out))
+            reg_preds.append(self.scale_exp[index](self.reg(reg_conv_out)))
+        return cls_logits, reg_preds, cnt_logits
 
+    # def forward_single(self, x):
+    #     cls_feat = x
+    #     reg_feat = x
+    #     for cls_conv in self.cls_convs:
+    #         cls_feat = cls_conv(cls_feat)
+    #     for reg_conv in self.reg_convs:
+    #         reg_feat = reg_conv(reg_feat)
+    #     if not self.cnt_on_reg:
+    #         cnt_feat = self.cnt(cls_feat)
+    #     else:
+    #         cnt_feat = self.cnt(reg_feat)
+    #     cls_score = self.cls(cls_feat)
+    #     bbox_pred = self.scale_exp(self.reg(reg_feat))
+    #     return cls_score, bbox_pred, cnt_feat
+    #
+    # def forward(self, feats):
+    #     cls_scores, bbox_preds, cnt_feats = multi_apply(self.forward_single, feats)
+    #     return cls_scores, bbox_preds, cnt_feats
 
 
