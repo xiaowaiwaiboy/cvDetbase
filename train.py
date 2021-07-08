@@ -30,7 +30,7 @@ opt = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = opt.n_gpu
 if opt.resume_from is not None:
     config = json_file.load(opt.resume_from)
-    weights = torch.load(f'epoch_{config["epoch"]}')
+    weights = torch.load('last_epoch.pth')
 else:
     config = yaml.load(open(opt.config_file, 'r'), Loader=yaml.FullLoader)
     weights = None
@@ -56,7 +56,11 @@ logger.info('Environment info:\n' + dash_line + env_info + '\n' + dash_line)
 
 model = build_detector(cfg=model_cfg)
 if weights:
-    model.load_state_dict(weights)
+    pretrained = model.state_dict()
+    for k, v in pretrained.items():
+        if 'module.' + k in weights:
+            pretrained[k] = weights['module.'+k]
+    model.load_state_dict(pretrained)
 if torch.cuda.is_available():
     model = torch.nn.DataParallel(model).cuda()
 else:
@@ -74,7 +78,7 @@ eval_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=eval_cfg.get(
 optimizer = build_optimizer(config.get('optimizer'), params=model.parameters())
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=3, verbose=True)
 loss_hist = collections.deque(maxlen=500)
-best_map = 0
+best_map = 0.5
 for epoch in range(opt.epochs):
     model.training = True
     model.train()
@@ -113,16 +117,18 @@ for epoch in range(opt.epochs):
             )
         del losses
 
-    if epoch % opt.eval_epoch == 0:
+    if (epoch+1) % opt.eval_epoch == 0:
         model.training = False
         model.eval()
         mAP = mAP_compute(model, eval_loader, logger, iou_thresh=0.7)
         if mAP > best_map:
             best_map = mAP
             torch.save(model.state_dict(), '{}/epoch_{}_{:.3f}.pth'.format(logpath, epoch+1, mAP))
-            config['epoch'] = epoch
             json_file.save(config, osp.join(logpath, f'{timestamp}.json'))
+    torch.save(model.state_dict(), 'last_epoch.pth')
+    config['epoch'] = epoch+1
+    config['steps'] = len(train_loader)*(epoch+1)
 
     scheduler.step(np.mean(epoch_loss))
-writer.export_scalars_to_json(osp.join(logpath, f'{timestamp}_scalars.json'))
+# writer.export_scalars_to_json(osp.join(logpath, f'{timestamp}_scalars.json'))
 model.eval()

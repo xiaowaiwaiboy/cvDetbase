@@ -40,3 +40,14 @@ class json_file(FileBase):
             raise TypeError(f'File to show must be a dict or json file! But got {type(cfg)} instead.')
 
 
+class yaml_file(FileBase):
+
+    @staticmethod
+    def save(output, data):
+        return
+
+    @staticmethod
+    def load(inputs):
+        return
+
+

@@ -23,19 +23,18 @@ class Self_Attention(nn.Module):
         self.cv3 = nn.Conv2d(32, 8, kernel_size=(1, 1), stride=(1, 1))
 
     def forward(self, under, over):
-        x = torch.cat((under, over), dim=1)
+        x = torch.cat((under, over), dim=1)  # B, C, H, W
         output = self.relu(self.bn(self.conv1(x)))
         output = self.maxpool(output)
         output = self.relu(self.bn2(self.conv2(output)))
 
         C = self.Cv1(output)
-        C = C.view(C.shape[0] * C.shape[1], C.shape[2] * C.shape[3])
-
+        C = C.view(C.shape[0] * C.shape[1], C.shape[2] * C.shape[3])  # BxC', H'xW'
         c1 = self.cv2(output)
-        c1 = c1.view(c1.shape[0] * c1.shape[2] * c1.shape[3], 8)
+        c1 = c1.view(c1.shape[0] * c1.shape[2] * c1.shape[3], 8)  # BxH"xW", C"
 
         c2 = self.cv3(output)
-        c2 = c2.view(c2.shape[0] * c2.shape[2] * c2.shape[3], 8).t()
+        c2 = c2.view(c2.shape[0] * c2.shape[2] * c2.shape[3], 8).t()  # C", BxH"xW"
 
         c = torch.nn.Softmax(dim=1)(torch.mm(c1, c2))
 
