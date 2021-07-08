@@ -77,7 +77,7 @@ eval_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=eval_cfg.get(
 
 optimizer = build_optimizer(config.get('optimizer'), params=model.parameters())
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=3, verbose=True)
-loss_hist = collections.deque(maxlen=500)
+loss_hist = collections.deque(maxlen=100)
 best_map = 0.5
 for epoch in range(opt.epochs):
     model.training = True
@@ -128,6 +128,7 @@ for epoch in range(opt.epochs):
     torch.save(model.state_dict(), 'last_epoch.pth')
     config['epoch'] = epoch+1
     config['steps'] = len(train_loader)*(epoch+1)
+    config['optimizer']['lr'] = lr  # 保存当前学习率
 
     scheduler.step(np.mean(epoch_loss))
 # writer.export_scalars_to_json(osp.join(logpath, f'{timestamp}_scalars.json'))

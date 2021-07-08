@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be68ab11-ea33-4dd2-8622-42929e9b8908" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ViT/model/vit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViT/model/self-attention-block.py" beforeDir="false" afterPath="$PROJECT_DIR$/ViT/model/self-attention-block.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN/model/head/fcos_head.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/files.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +44,7 @@
       <recent name="G:\pycharm_projects\cvDetbase" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.vit">
+  <component name="RunManager" selected="Python.train">
     <configuration name="CAM_vis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="cvDetbase" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -155,8 +152,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.vit" />
         <item itemvalue="Python.train" />
+        <item itemvalue="Python.vit" />
         <item itemvalue="Python.self-attention-block" />
         <item itemvalue="Python.CAM_vis" />
         <item itemvalue="Python.dataset_vis" />
